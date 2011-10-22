@@ -3,7 +3,7 @@ body {
   padding: 10px;
 }
 
-.__container {
+.__phg_container {
 }
 
 .clearfix {zoom:1;}
@@ -18,14 +18,14 @@ h1 {
   margin-bottom: 22px;
 }
 
-#body_part h2, #js_part h2, #short_memo_part h2 {
+#__phg__ h2, #__phg__ h2, #__phg__ h2 {
   font-weight: normal;
   margin: 18px 0 0 0;
   font-size: 12px;
   color: #444;
 }
 
-#body_part pre, #js_part pre, #short_memo_part pre {
+#__phg__ pre, #__phg__ pre, #__phg__ pre {
   margin: 0px;
   padding: 10px;
   background: #ccc;

@@ -24,7 +24,7 @@ module PresentHtmlGenerator
         :outputdir      => "_present_html",
         :assetsdir      => "assets",
         :title          => Pathname.pwd.basename.to_s.titleize,
-        :verbose        => true,
+        :verbose        => false,
         :css            => "application.css",
         :index_template => "index.html.erb",
       }.merge(config)
@@ -44,7 +44,6 @@ module PresentHtmlGenerator
         @content = current_file.read
         output_file = outputdir + current_file.basename
         @number = current_file.basename.to_s.to_i
-        FileUtils.makedirs(output_file.dirname, :verbose => @config[:verbose])
         output_file.open("w"){|f|f << new_content}
         puts "write: #{output_file} (#{@current_index.next}/#{target_files.size})"
       }
@@ -128,7 +127,7 @@ module PresentHtmlGenerator
 
     def paginate
       html = ""
-      html << "<div class=\"paginate\">\n"
+      html << "<div class=\"__phg_paginate\">\n"
       html << "<a href=\"index.html\">INDEX</a>\n"
       html << "#{@current_index.next} / #{target_files.size}\n"
       if file = next_file(-1)
@@ -160,7 +159,7 @@ module PresentHtmlGenerator
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
         html << "<body>\n"
-        html << "<div class=\"__container clearfix\">\n"
+        html << "<div class=\"__phg_container clearfix\">\n"
         html << "#{$1}"
         html << "</div>\n"
         html << "</body>\n"
@@ -170,25 +169,25 @@ module PresentHtmlGenerator
         html = ""
         html << "#{$1}"
         html << paginate
-        html << "    <h1>#{h1_part}</h1>\n"
+        html << "    <h1 class=\"__phg__\">#{h1_part}</h1>\n"
       }
 
       new_content = new_content.gsub(/(<\/body>)/){
         html = ""
         if body_part.present?
-          html << "<section id=\"body_part\">\n"
+          html << "<section class=\"__phg__\">\n"
           html << "  <h2>HTML</h2>\n"
           html << "  <pre>#{CGI.escapeHTML(body_part)}</pre>\n"
           html << "</section>\n"
         end
         if js_part.present?
-          html << "<section id=\"js_part\">\n"
+          html << "<section class=\"__phg__\">\n"
           html << "  <h2>JavaScript</h2>\n"
           html << "  <pre>#{CGI.escapeHTML(js_part)}</pre>\n"
           html << "</section>\n"
         end
         if short_memo_part.present?
-          html << "<section id=\"short_memo_part\">\n"
+          html << "<section class=\"__phg__\">\n"
           html << "  <h2>MEMO</h2>\n"
           str = short_memo_part.join("\n")
           html << "  <pre>#{CGI.escapeHTML(str)}</pre>\n"
