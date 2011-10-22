@@ -1,0 +1,63 @@
+<!-- マウスオーバーしたときだけ薄くするには？ -->
+<!doctype html>
+<html>
+  <head>
+<link href="application.css" media="screen" rel="Stylesheet" type="text/css" />
+    <meta charset="UTF-8" />
+    <script src="assets/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(function(){
+        $(".container *").hover(
+          function(){
+            $(this).css({opacity: 0.6});
+          },
+          function(){
+            $(this).css({opacity: 1.0});
+          });
+      });
+    </script>
+  </head>
+  <body>
+<div class="paginate">
+<a href="index.html">INDEX</a>
+2 / 3
+    <a href="10_hello_world.html" class="prev">&lt;&lt;</a>
+    <a href="30_bootstrap.html" class="next">&gt;&gt;</a>
+</div>
+    <h1>マウスオーバーしたときだけ薄くするには？</h1>
+<div class="__container clearfix">
+
+    <div class="container">
+      <img src="assets/rails.png" />
+      <span>あいうえお</span>
+      <button>あいうえお</button>
+    </div>
+  </div>
+<section id="body_part">
+  <h2>HTML</h2>
+  <pre>&lt;div class=&quot;container&quot;&gt;
+  &lt;img src=&quot;assets/rails.png&quot; /&gt;
+  &lt;span&gt;あいうえお&lt;/span&gt;
+  &lt;button&gt;あいうえお&lt;/button&gt;
+&lt;/div&gt;</pre>
+</section>
+<section id="js_part">
+  <h2>JavaScript</h2>
+  <pre>$(&quot;.container *&quot;).hover(
+  function(){
+    $(this).css({opacity: 0.6});
+  },
+  function(){
+    $(this).css({opacity: 1.0});
+  });
+</pre>
+</section>
+<div class="paginate">
+<a href="index.html">INDEX</a>
+2 / 3
+    <a href="10_hello_world.html" class="prev">&lt;&lt;</a>
+    <a href="30_bootstrap.html" class="next">&gt;&gt;</a>
+</div>
+</body>
+
+</html>

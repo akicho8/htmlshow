@@ -29,6 +29,10 @@ module PresentHtmlGenerator
       config[:files] = Array.wrap(config[:files]) + args
 
       if config[:files].empty?
+        config[:files] << "*.html"
+      end
+
+      if config[:files].empty? && false
         puts oparser
         abort
       end
