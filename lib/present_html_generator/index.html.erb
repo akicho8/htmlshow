@@ -5,13 +5,11 @@
     <title><%= @config[:title] %></title>
     <%= stylesheet_link_tag %>
     <script src="jquery.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function(){
-        $(".filename").css({opacity: 0.2});
-        $("a").css({"text-decoration": "none"});
-        $("ul").css({"list-style-type": "none"});
-      });
-    </script>
+    <style type="text/css">
+      .filename {opacity: 0.2}
+      a {text-decoration: none}
+      ul {list-style-type: none}
+    </style>
   </head>
   <body>
     <div id="index">

@@ -18,9 +18,9 @@ module PresentHtmlGenerator
 
     def initialize(config = {}, &block)
       @config = {
-        :rebuild        => false,
+        :reset          => false,
         :static         => false,
-        :files           => "*.html",
+        :files          => "*.html",
         :outputdir      => "_present_html",
         :assetsdir      => "assets",
         :title          => Pathname.pwd.basename.to_s.titleize,
@@ -35,7 +35,7 @@ module PresentHtmlGenerator
     end
 
     def run
-      if @config[:rebuild]
+      if @config[:reset]
         FileUtils.rm_rf(outputdir, :verbose => @config[:verbose])
       end
       FileUtils.makedirs(outputdir, :verbose => @config[:verbose])
@@ -68,22 +68,22 @@ module PresentHtmlGenerator
     end
 
     def make_assets_symlink
-      unless assetsdir.exist?
-        puts "Source assets directory not found: #{assetsdir}"
+      unless source_assets_path.exist?
+        puts "Source assets directory not found: #{source_assets_path}"
         return
       end
 
-      dest_assets_path = outputdir + assetsdir.basename
+      dest_assets_path = outputdir + source_assets_path.basename
       if dest_assets_path.exist?
-        puts "Destination assets directory already exist: #{assetsdir}"
+        puts "Destination assets directory already exist: #{source_assets_path}"
         return
       end
 
       if @config[:static]
-        FileUtils.cp_r(assetsdir, outputdir, :verbose => @config[:verbose])
+        FileUtils.cp_r(source_assets_path, outputdir, :verbose => @config[:verbose])
       else
-        dest_assets_path.make_symlink(assetsdir)
-        puts "ln -s #{assetsdir} #{dest_assets_path}"
+        puts "ln -s #{source_assets_path} #{dest_assets_path}"
+        dest_assets_path.make_symlink(source_assets_path)
       end
     end
 
@@ -223,7 +223,7 @@ module PresentHtmlGenerator
       Pathname(@config[:outputdir]).expand_path
     end
 
-    def assetsdir
+    def source_assets_path
       Pathname(@config[:assetsdir]).expand_path
     end
 
@@ -265,7 +265,7 @@ if $0 == __FILE__
     config[:files] = Pathname(__FILE__).dirname.join("../../examples/*.html").expand_path
     config[:range] = 0..100
     config[:static] = false
-    config[:rebuild] = true
+    config[:reset] = true
     config[:assetsdir] = Pathname(__FILE__).dirname.join("../../examples/assets").expand_path
     config[:outputdir] = "/tmp/_output"
   end

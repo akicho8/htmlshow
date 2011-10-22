@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "http://github.com/akicho8"
   spec.description = "present_html_generator"
   spec.email = "akicho8@gmail.com"
-  spec.files = Dir.glob("**/*")
+  spec.files = Dir.glob("**/*").reject{|e|e.match("/_present_html/")}
   spec.test_files = Dir.glob("test/test_*.rb")
   spec.rdoc_options = ["--line-numbers", "--inline-source", "--charset=UTF-8", "--diagram", "--image-format=jpg"]
   spec.executables = ["present_html_generator"]

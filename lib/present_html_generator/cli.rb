@@ -21,7 +21,7 @@ module PresentHtmlGenerator
         oparser.on("-a", "--assetsdir=DIR", "assetsディレクトリ", String){|config[:assetsdir]|}
         oparser.on("-o", "--outputdir=DIR", "出力ディレクトリ", String){|config[:outputdir]|}
         oparser.on("--title=TITLE", "タイトル", String){|config[:title]|}
-        oparser.on("--rebuild", "全部消して作り直す？", TrueClass){|config[:rebuild]|}
+        oparser.on("--reset", "全部消して作り直す？", TrueClass){|config[:reset]|}
         oparser.on("--[no-]static", "assetsをコピーする？", TrueClass){|config[:static]|}
       end
 
