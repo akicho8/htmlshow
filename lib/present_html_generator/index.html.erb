@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title><%= @config[:title] %></title>
-    <% if css_file && css_file.exist? %>
-      <link href="<%= css_file.basename %>" media="screen" rel="stylesheet" type="text/css" />
-    <% end %>
+    <%= stylesheet_link_tag %>
     <script src="jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function(){

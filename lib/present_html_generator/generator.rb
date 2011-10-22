@@ -140,7 +140,12 @@ module PresentHtmlGenerator
         html << "    <a href=\"#{file}\" class=\"next\">#{str}</a>\n"
       end
       html << "</div>\n"
-      html
+    end
+
+    def stylesheet_link_tag
+      if css_file && css_file.exist?
+        "<link href=\"#{css_file.basename}\" media=\"screen\" rel=\"Stylesheet\" type=\"text/css\" />"
+      end
     end
 
     def new_content
@@ -149,18 +154,16 @@ module PresentHtmlGenerator
       new_content = new_content.gsub(/(<head>)/){
         html = ""
         html << "#{$1}\n"
-        html << "    <link href=\"stylesheets/study.css\" media=\"screen\" rel=\"Stylesheet\" type=\"text/css\" />"
-        html
+        html << stylesheet_link_tag
       }
 
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
         html << "<body>\n"
-        html << "<div class=\"container clearfix\">\n"
+        html << "<div class=\"__container clearfix\">\n"
         html << "#{$1}"
         html << "</div>\n"
         html << "</body>\n"
-        html
       }
 
       new_content = new_content.gsub(/(<body>\n)/){
@@ -168,7 +171,6 @@ module PresentHtmlGenerator
         html << "#{$1}"
         html << paginate
         html << "    <h1>#{h1_part}</h1>\n"
-        html
       }
 
       new_content = new_content.gsub(/(<\/body>)/){
@@ -194,7 +196,6 @@ module PresentHtmlGenerator
         end
         html << paginate
         html << "#{$1}"
-        html
       }
 
       new_content
