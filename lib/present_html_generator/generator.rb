@@ -1,8 +1,8 @@
 #!/usr/local/bin/ruby -Ku
 # -*- coding: utf-8 -*-
 
-require "rubygems"
-require "active_support/all"
+require "active_support/core_ext/string"
+require "active_support/core_ext/array"
 require "pathname"
 require "fileutils"
 require "cgi"
@@ -49,7 +49,7 @@ module PresentHtmlGenerator
         puts "write: #{output_file} (#{@current_index.next}/#{target_files.size})"
       }
       make_index_html
-      puts "#{target_files.size} + 1 files done."
+      puts "#{target_files.size} files done."
     end
 
     private
@@ -237,7 +237,7 @@ module PresentHtmlGenerator
     end
 
     def css_file
-      if @config[:css].blank?
+      if @config[:css].empty?
         return
       end
 

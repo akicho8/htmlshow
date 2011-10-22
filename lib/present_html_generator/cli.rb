@@ -3,7 +3,6 @@
 
 require "present_html_generator/generator"
 require "optparse"
-require "pathname"
 
 module PresentHtmlGenerator
   class CLI
