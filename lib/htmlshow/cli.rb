@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
-require "html_show/generator"
+require "htmlshow/generator"
 require "optparse"
 
-module HtmlShow
+module Htmlshow
   class CLI
     def self.execute(args)
       config = {}
@@ -37,18 +37,18 @@ module HtmlShow
         abort
       end
 
-      HtmlShow.generate(config)
+      Htmlshow.generate(config)
     end
   end
 end
 
 if $0 == __FILE__
-  HtmlShow::CLI.execute([
+  Htmlshow::CLI.execute([
       "--files=../../examples/*.html",
       "--assetsdir=../../examples/assets",
       "--outputdir=/tmp/_output2",
       "--range=0..100",
     ])
 
-  HtmlShow::CLI.execute([])
+  Htmlshow::CLI.execute([])
 end

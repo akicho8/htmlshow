@@ -1,4 +1,4 @@
-HtmlShow
+Htmlshow
 ====================
 
 Example
@@ -15,7 +15,7 @@ Example
          ├── jquery.js
          └── rails.png
 
-    $ html_show
+    $ htmlshow
     3 files done.
 
     $ tree _present_html

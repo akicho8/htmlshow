@@ -1,3 +1,3 @@
 #!/bin/sh
-html_show --static
+htmlshow --static
 open _present_html/index.html
