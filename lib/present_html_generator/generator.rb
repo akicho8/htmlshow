@@ -136,7 +136,7 @@ module PresentHtmlGenerator
       html << "<a href=\"index.html\">■</a>\n"
       html << "#{@current_index.next} / #{target_files.size}\n"
       if file = next_file(-1)
-        str = CGI.escapeHTML("<<")
+        str = CGI.escapeHTML("戻る")
         html << "    <a href=\"#{file}\" class=\"prev\">#{str}</a>\n"
       end
       if file = next_file(+1)
@@ -215,7 +215,7 @@ module PresentHtmlGenerator
           html << "<section class=\"__phg__\">\n"
           html << "  <h2>MEMO</h2>\n"
           str = short_memo_part.join("\n")
-          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(str)}</pre>\n"
+          html << "  <pre class=\"\">#{CGI.escapeHTML(str)}</pre>\n"
           html << "</section>\n"
         end
         html << paginate
