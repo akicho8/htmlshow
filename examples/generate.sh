@@ -1,3 +1,3 @@
 #!/bin/sh
-present_html_generator --static
+html_show --static
 open _present_html/index.html

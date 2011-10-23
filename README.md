@@ -1,4 +1,4 @@
-PresentHtmlGenerator
+HtmlShow
 ====================
 
 Example
@@ -15,7 +15,7 @@ Example
          ├── jquery.js
          └── rails.png
 
-    $ present_html_generator
+    $ html_show
     3 files done.
 
     $ tree _present_html

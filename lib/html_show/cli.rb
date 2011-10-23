@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
-require "present_html_generator/generator"
+require "html_show/generator"
 require "optparse"
 
-module PresentHtmlGenerator
+module HtmlShow
   class CLI
     def self.execute(args)
       config = {}
@@ -37,18 +37,18 @@ module PresentHtmlGenerator
         abort
       end
 
-      PresentHtmlGenerator.generate(config)
+      HtmlShow.generate(config)
     end
   end
 end
 
 if $0 == __FILE__
-  PresentHtmlGenerator::CLI.execute([
+  HtmlShow::CLI.execute([
       "--files=../../examples/*.html",
       "--assetsdir=../../examples/assets",
       "--outputdir=/tmp/_output2",
       "--range=0..100",
     ])
 
-  PresentHtmlGenerator::CLI.execute([])
+  HtmlShow::CLI.execute([])
 end

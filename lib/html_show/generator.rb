@@ -8,7 +8,7 @@ require "fileutils"
 require "cgi"
 require "pp"
 
-module PresentHtmlGenerator
+module HtmlShow
   def self.generate(*args, &block)
     Generator.new(*args, &block).run
   end
@@ -301,7 +301,7 @@ module PresentHtmlGenerator
 end
 
 if $0 == __FILE__
-  PresentHtmlGenerator.generate do |config|
+  HtmlShow.generate do |config|
     config[:files] = Pathname(__FILE__).dirname.join("../../examples/*.html").expand_path
     config[:range] = 0..100
     config[:static] = false

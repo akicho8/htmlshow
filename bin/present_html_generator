@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-begin
-  require "present_html_generator/cli"
-rescue LoadError
-  require "rubygems"
-  require "present_html_generator/cli"
-end
-PresentHtmlGenerator::CLI.execute(ARGV)
