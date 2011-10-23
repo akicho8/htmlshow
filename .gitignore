@@ -1,3 +1,4 @@
 .sass-cache
 *.gem
 /lib/present_html_generator/_present_html
+/README.html

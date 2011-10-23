@@ -1,27 +1,34 @@
-$ tree
-.
-├── 10_hello_world.html
-├── 20_jquery_hover.html
-├── 30_bootstrap.html
-└── assets
-     ├── bootstrap.css
-     ├── jquery.js
-     └── rails.png
+PresentHtmlGenerator
+====================
 
-$ present_html_generator
-3 files done.
+Example
+-------
 
-$ tree _present_html
-_present_html/
-├── 10_hello_world.html
-├── 20_jquery_hover.html
-├── 30_bootstrap.html
-├── application.css
-├── assets
-│   ├── bootstrap.css
-│   ├── jquery.js
-│   └── rails.png
-├── index.html
-└── jquery.js
+    $ cd examples
+    $ tree
+    .
+    ├── 10_hello_world.html
+    ├── 20_jquery_hover.html
+    ├── 30_bootstrap.html
+    └── assets
+         ├── bootstrap.css
+         ├── jquery.js
+         └── rails.png
 
-$ open _present_html/index.html
+    $ present_html_generator
+    3 files done.
+
+    $ tree _present_html
+    _present_html/
+    ├── 10_hello_world.html
+    ├── 20_jquery_hover.html
+    ├── 30_bootstrap.html
+    ├── application.css
+    ├── assets
+    │   ├── bootstrap.css
+    │   ├── jquery.js
+    │   └── rails.png
+    ├── index.html
+    └── jquery.js
+
+    $ open _present_html/index.html

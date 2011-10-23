@@ -133,14 +133,14 @@ module PresentHtmlGenerator
     def paginate
       html = ""
       html << "<div class=\"__phg_paginate\">\n"
-      html << "<a href=\"index.html\">INDEX</a>\n"
+      html << "<a href=\"index.html\">■</a>\n"
       html << "#{@current_index.next} / #{target_files.size}\n"
       if file = next_file(-1)
         str = CGI.escapeHTML("<<")
         html << "    <a href=\"#{file}\" class=\"prev\">#{str}</a>\n"
       end
       if file = next_file(+1)
-        str = CGI.escapeHTML(">>")
+        str = CGI.escapeHTML("もっと見る")
         html << "    <a href=\"#{file}\" class=\"next\">#{str}</a>\n"
       end
       html << "</div>\n"
