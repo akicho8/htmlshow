@@ -184,7 +184,7 @@ module PresentHtmlGenerator
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
         html << "<body>\n"
-        html << "<div class=\"__phg_container clearfix\">\n"
+        html << "<div class=\"__phg_container __phg_clearfix\">\n"
         html << "#{$1}"
         html << "</div>\n"
         html << "</body>\n"
