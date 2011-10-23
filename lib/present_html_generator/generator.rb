@@ -176,7 +176,7 @@ module PresentHtmlGenerator
           html = ""
           html << "<script src=\"prettify.js\" type=\"text/javascript\"></script>\n"
           html << "<link href=\"prettify.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n"
-          html << "<script>$(function(){prettyPrint()})</script>\n"
+          html << "<script>$(function(){if(!$.__pp__){prettyPrint();$.__pp__=1}})</script>\n"
           html << "#{$1}\n"
         }
       end
