@@ -27,6 +27,7 @@ module PresentHtmlGenerator
         :verbose        => false,
         :css            => "application.css",
         :index_template => "index.html.erb",
+        :prettify       => true,
       }.merge(config)
 
       if block_given?
@@ -117,8 +118,12 @@ module PresentHtmlGenerator
       end
     end
 
-    def body_part
-      if md = @content.match(/<body>(.*)<\/body>/m)
+    def js_include_files
+      @content.scan(/<script.*src="(\S+\.js)"/).flatten
+    end
+
+    def part_for(name)
+      if md = @content.match(/<#{name}>(.*)<\/#{name}>/m)
         str = md.captures.first
         str = str.gsub(/<!-- .*? -->/, "")
         str.strip_heredoc.strip
@@ -156,6 +161,26 @@ module PresentHtmlGenerator
         html << stylesheet_link_tag
       }
 
+      if require_jqeury?
+        unless js_include_files.join(",").match(/\b(jquery)\b/)
+          new_content = new_content.gsub(/(<head>)/){
+            html = ""
+            html << "#{$1}\n"
+            html << "<script src=\"jquery.js\" type=\"text/javascript\"></script>\n"
+          }
+        end
+      end
+
+      if @config[:prettify]
+        new_content = new_content.gsub(/(<\/head>)/){
+          html = ""
+          html << "<script src=\"prettify.js\" type=\"text/javascript\"></script>\n"
+          html << "<link href=\"prettify.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n"
+          html << "<script>$(function(){prettyPrint()})</script>\n"
+          html << "#{$1}\n"
+        }
+      end
+
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
         html << "<body>\n"
@@ -174,23 +199,23 @@ module PresentHtmlGenerator
 
       new_content = new_content.gsub(/(<\/body>)/){
         html = ""
-        if body_part.present?
+        if part_for(:body).present?
           html << "<section class=\"__phg__\">\n"
           html << "  <h2>HTML</h2>\n"
-          html << "  <pre>#{CGI.escapeHTML(body_part)}</pre>\n"
+          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(part_for(:body))}</pre>\n"
           html << "</section>\n"
         end
         if js_part.present?
           html << "<section class=\"__phg__\">\n"
           html << "  <h2>JavaScript</h2>\n"
-          html << "  <pre>#{CGI.escapeHTML(js_part)}</pre>\n"
+          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(js_part)}</pre>\n"
           html << "</section>\n"
         end
         if short_memo_part.present?
           html << "<section class=\"__phg__\">\n"
           html << "  <h2>MEMO</h2>\n"
           str = short_memo_part.join("\n")
-          html << "  <pre>#{CGI.escapeHTML(str)}</pre>\n"
+          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(str)}</pre>\n"
           html << "</section>\n"
         end
         html << paginate
@@ -200,15 +225,31 @@ module PresentHtmlGenerator
       new_content
     end
 
+    def require_jqeury?
+      true
+    end
+
     def next_file(add)
       index = @current_index + add
-      if (0...target_files.size).include?(index)
-        target_files[index].basename
+      if true
+        if target_files.size.nonzero?
+          target_files[index.modulo(target_files.size)].basename
+        end
+      else
+        if (0...target_files.size).include?(index)
+          target_files[index].basename
+        end
       end
     end
 
     def make_index_html
       FileUtils.cp(Pathname(__FILE__).dirname.join("jquery.js"), outputdir, :verbose => true)
+
+      if @config[:prettify]
+        FileUtils.cp(Pathname(__FILE__).dirname.join("prettify.js"), outputdir, :verbose => true)
+        FileUtils.cp(Pathname(__FILE__).dirname.join("prettify.css"), outputdir, :verbose => true)
+      end
+
       if css_file.exist?
         FileUtils.cp(css_file, outputdir, :verbose => true)
       end
@@ -267,5 +308,7 @@ if $0 == __FILE__
     config[:reset] = true
     config[:assetsdir] = Pathname(__FILE__).dirname.join("../../examples/assets").expand_path
     config[:outputdir] = "/tmp/_output"
+    config[:prettify] = true
   end
+  `open /tmp/_output/index.html`
 end
