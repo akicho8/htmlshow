@@ -1,3 +1,4 @@
 #!/bin/sh
+# コマンドラインから使う例
 htmlshow --static
-open _present_html/index.html
+open _show_files/index.html

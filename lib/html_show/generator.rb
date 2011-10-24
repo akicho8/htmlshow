@@ -8,7 +8,7 @@ require "fileutils"
 require "cgi"
 require "pp"
 
-module Htmlshow
+module HtmlShow
   def self.generate(*args, &block)
     Generator.new(*args, &block).run
   end
@@ -21,7 +21,7 @@ module Htmlshow
         :reset          => false,
         :static         => false,
         :files          => "*.html",
-        :outputdir      => "_present_html",
+        :outputdir      => "_show_files",
         :assetsdir      => "assets",
         :title          => Pathname.pwd.basename.to_s.titleize,
         :verbose        => false,
@@ -132,7 +132,7 @@ module Htmlshow
 
     def paginate
       html = ""
-      html << "<div class=\"__phg_paginate\">\n"
+      html << "<div class=\"__hs_paginate\">\n"
       html << "<a href=\"index.html\">■</a>\n"
       html << "#{@current_index.next} / #{target_files.size}\n"
       if file = next_file(-1)
@@ -184,7 +184,7 @@ module Htmlshow
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
         html << "<body>\n"
-        html << "<div class=\"__phg_container __phg_clearfix\">\n"
+        html << "<div class=\"__hs_container __hs_clearfix\">\n"
         html << "#{$1}"
         html << "</div>\n"
         html << "</body>\n"
@@ -194,25 +194,25 @@ module Htmlshow
         html = ""
         html << "#{$1}"
         html << paginate
-        html << "    <h1 class=\"__phg__\">#{h1_part}</h1>\n"
+        html << "    <h1 class=\"__hs__\">#{h1_part}</h1>\n"
       }
 
       new_content = new_content.gsub(/(<\/body>)/){
         html = ""
         if part_for(:body).present?
-          html << "<section class=\"__phg__\">\n"
+          html << "<section class=\"__hs__\">\n"
           html << "  <h2>HTML</h2>\n"
           html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(part_for(:body))}</pre>\n"
           html << "</section>\n"
         end
         if js_part.present?
-          html << "<section class=\"__phg__\">\n"
+          html << "<section class=\"__hs__\">\n"
           html << "  <h2>JavaScript</h2>\n"
           html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(js_part)}</pre>\n"
           html << "</section>\n"
         end
         if short_memo_part.present?
-          html << "<section class=\"__phg__\">\n"
+          html << "<section class=\"__hs__\">\n"
           html << "  <h2>MEMO</h2>\n"
           str = short_memo_part.join("\n")
           html << "  <pre class=\"\">#{CGI.escapeHTML(str)}</pre>\n"
@@ -301,7 +301,7 @@ module Htmlshow
 end
 
 if $0 == __FILE__
-  Htmlshow.generate do |config|
+  HtmlShow.generate do |config|
     config[:files] = Pathname(__FILE__).dirname.join("../../examples/*.html").expand_path
     config[:range] = 0..100
     config[:static] = false

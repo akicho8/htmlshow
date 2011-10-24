@@ -1,5 +1,5 @@
-Htmlshow
-====================
+HtmlShow
+========
 
 Example
 -------
@@ -18,8 +18,8 @@ Example
     $ htmlshow
     3 files done.
 
-    $ tree _present_html
-    _present_html/
+    $ tree _show_files
+    _show_files/
     ├── 10_hello_world.html
     ├── 20_jquery_hover.html
     ├── 30_bootstrap.html
@@ -31,4 +31,4 @@ Example
     ├── index.html
     └── jquery.js
 
-    $ open _present_html/index.html
+    $ open _show_files/index.html

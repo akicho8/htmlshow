@@ -1,4 +1,4 @@
 .sass-cache
 *.gem
-/lib/htmlshow/_present_html
+/lib/html_show/_show_files
 /README.html
