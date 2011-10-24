@@ -20,7 +20,7 @@ module HtmlShow
       @config = {
         :reset          => false,
         :static         => false,
-        :files          => "*.html",
+        :files          => [],
         :outputdir      => "_show_files",
         :assetsdir      => "assets",
         :title          => Pathname.pwd.basename.to_s.titleize,
@@ -28,6 +28,7 @@ module HtmlShow
         :css            => "application.css",
         :index_template => "index.html.erb",
         :prettify       => true,
+        :open           => false,
       }.merge(config)
 
       if block_given?
@@ -50,6 +51,11 @@ module HtmlShow
       }
       make_index_html
       puts "#{target_files.size} files done."
+      if @config[:open]
+        if RUBY_PLATFORM.match(/darwin/)
+          `open #{index_html}`
+        end
+      end
     end
 
     private
@@ -254,9 +260,12 @@ module HtmlShow
         FileUtils.cp(css_file, outputdir, :verbose => true)
       end
 
-      index_html = outputdir + index_template.basename.to_s.gsub(/\.erb\z/, "")
       index_html.open("w"){|f|f << ERB.new(index_template.read).result(binding)}
       puts "write: #{index_html}"
+    end
+
+    def index_html
+      outputdir + index_template.basename.to_s.gsub(/\.erb\z/, "")
     end
 
     def outputdir
