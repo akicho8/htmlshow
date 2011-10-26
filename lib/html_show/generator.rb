@@ -88,8 +88,13 @@ module HtmlShow
       if @config[:static]
         FileUtils.cp_r(source_assets_path, outputdir, :verbose => @config[:verbose])
       else
-        puts "ln -s #{source_assets_path} #{dest_assets_path}"
-        dest_assets_path.make_symlink(source_assets_path)
+        if dest_assets_path.to_s.start_with?(source_assets_path.to_s)
+          path = source_assets_path.relative_path_from(outputdir)
+        else
+          path = source_assets_path
+        end
+        puts "ln -s #{source_assets_path} #{path}"
+        dest_assets_path.make_symlink(path)
       end
     end
 
