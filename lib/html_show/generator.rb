@@ -29,6 +29,7 @@ module HtmlShow
         :index_template => "index.html.erb",
         :prettify       => true,
         :open           => false,
+        :relpath        => true,
       }.merge(config)
 
       if block_given?
@@ -88,12 +89,12 @@ module HtmlShow
       if @config[:static]
         FileUtils.cp_r(source_assets_path, outputdir, :verbose => @config[:verbose])
       else
-        if dest_assets_path.to_s.start_with?(source_assets_path.to_s)
+        if @config[:relpath]
           path = source_assets_path.relative_path_from(outputdir)
         else
           path = source_assets_path
         end
-        puts "ln -s #{source_assets_path} #{path}"
+        puts "ln -s #{dest_assets_path} #{path}"
         dest_assets_path.make_symlink(path)
       end
     end
@@ -321,8 +322,9 @@ if $0 == __FILE__
     config[:static] = false
     config[:reset] = true
     config[:assetsdir] = Pathname(__FILE__).dirname.join("../../examples/assets").expand_path
-    config[:outputdir] = "/tmp/_output"
+    # config[:outputdir] = "/tmp/_output"
     config[:prettify] = true
+    # config[:relpath] = false
+    config[:open] = false
   end
-  `open /tmp/_output/index.html`
 end

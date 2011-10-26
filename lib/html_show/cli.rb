@@ -24,6 +24,7 @@ module HtmlShow
         oparser.on("--title=TITLE", "タイトル(初期値:#{config[:title]})", String){|config[:title]|}
         oparser.on("--reset", "全部消して作り直す？(初期値:#{config[:reset]})", TrueClass){|config[:reset]|}
         oparser.on("--[no-]static", "assetsをコピーする？(初期値:#{config[:static]})", TrueClass){|config[:static]|}
+        oparser.on("--[no-]relpath", "assetsをsymlinkするとき相対パスにしとく？(初期値:#{config[:relpath]})", TrueClass){|config[:relpath]|}
       end
 
       args = oparser.parse(args)
