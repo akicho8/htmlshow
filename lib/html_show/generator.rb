@@ -1,4 +1,3 @@
-#!/usr/local/bin/ruby -Ku
 # -*- coding: utf-8 -*-
 
 require "active_support/core_ext/string"
