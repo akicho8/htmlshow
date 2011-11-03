@@ -15,12 +15,12 @@ module HtmlShow
           "usage: #{oparser.program_name} [options] files...",
         ].collect{|e|e + "\n"}
         oparser.separator("options:")
-        oparser.on("-i", "--files=FILES", "対象ファイル(引数で指定しても可)"){|config[:files]|}
+        oparser.on("-i", "--files=FILES", "対象ファイル(オプションで指定してもいい)"){|config[:files]|}
         oparser.on("-r", "--range=RANGE", "範囲(初期値:指定なし)"){|config[:range]|}
         oparser.on("-a", "--assetsdir=DIR", "assetsディレクトリ(初期値:#{config[:assetsdir]})", String){|config[:assetsdir]|}
         oparser.on("--outputdir=DIR", "出力ディレクトリ(初期値:#{config[:outputdir]})", String){|config[:outputdir]|}
         oparser.on("-o", "--open", "index.html を自動的に開く(初期値:#{config[:open]})", TrueClass){|config[:open]|}
-        oparser.on("--title=TITLE", "タイトル(初期値:#{config[:title]})", String){|config[:title]|}
+        oparser.on("--title=TITLE", "タイトル(初期値:pwdのtitleizeで#{config[:title]})", String){|config[:title]|}
         oparser.on("--reset", "全部消して作り直す？(初期値:#{config[:reset]})", TrueClass){|config[:reset]|}
         oparser.on("--[no-]static", "assetsをコピーする？(初期値:#{config[:static]})", TrueClass){|config[:static]|}
         oparser.on("--[no-]relpath", "assetsをsymlinkするとき相対パスにしとく？(初期値:#{config[:relpath]})", TrueClass){|config[:relpath]|}

@@ -15,9 +15,9 @@
     <div id="index">
       <h1><%= @config[:title] %></h1>
       <ul>
-        <% each_file do |file, index| %>
+<% each_file do |file, index| %>
           <li><a href="<%= file.basename %>"><%= index.next %>. <%= h1_part %></a> <span class="filename"><%= file.basename %></span></li>
-        <% end %>
+<% end %>
       </ul>
     </div>
   </body>
