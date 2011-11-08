@@ -24,7 +24,7 @@ module HtmlShow
         :assetsdir      => "assets",
         :title          => Pathname.pwd.basename.to_s.titleize,
         :verbose        => false,
-        :css            => "application.css",
+        :css            => "htmlshow.css",
         :index_template => "index.html.erb",
         :prettify       => true,
         :open           => false,
@@ -212,21 +212,21 @@ module HtmlShow
         html = ""
         if part_for(:body).present?
           html << "<section class=\"__hs__\">\n"
-          html << "  <h2>HTML</h2>\n"
+          html << "  <h2 class=\"__hs__\">HTML</h2>\n"
           html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(part_for(:body))}</pre>\n"
           html << "</section>\n"
         end
         if js_part.present?
           html << "<section class=\"__hs__\">\n"
-          html << "  <h2>JavaScript</h2>\n"
+          html << "  <h2 class=\"__hs__\">JavaScript</h2>\n"
           html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(js_part)}</pre>\n"
           html << "</section>\n"
         end
         if short_memo_part.present?
           html << "<section class=\"__hs__\">\n"
-          html << "  <h2>MEMO</h2>\n"
+          html << "  <h2 class=\"__hs__\">MEMO</h2>\n"
           str = short_memo_part.join("\n")
-          html << "  <pre class=\"\">#{CGI.escapeHTML(str)}</pre>\n"
+          html << "  <pre class=\"__hs__\">#{CGI.escapeHTML(str)}</pre>\n"
           html << "</section>\n"
         end
         html << paginate
@@ -300,7 +300,7 @@ module HtmlShow
         return css
       end
 
-      Pathname(__FILE__).dirname.join("application.css")
+      Pathname(__FILE__).dirname.join("htmlshow.css")
     end
 
     def range_value
