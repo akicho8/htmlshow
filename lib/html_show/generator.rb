@@ -29,6 +29,7 @@ module HtmlShow
         :prettify       => true,
         :open           => false,
         :relpath        => true,
+        :keyboard       => true,
       }.merge(config)
 
       if block_given?
@@ -54,6 +55,8 @@ module HtmlShow
       if @config[:open]
         if RUBY_PLATFORM.match(/darwin/)
           `open #{index_html}`
+        else
+          `start #{index_html}`
         end
       end
     end
@@ -144,7 +147,7 @@ module HtmlShow
     def paginate
       html = ""
       html << "<div class=\"__hs_paginate\">\n"
-      html << "<a href=\"index.html\">■</a>\n"
+      html << "<a href=\"index.html\" class=\"index\">■</a>\n"
       html << "#{@current_index.next} / #{target_files.size}\n"
       if file = next_file(-1)
         str = CGI.escapeHTML("戻る")
@@ -191,6 +194,12 @@ module HtmlShow
           html << "#{$1}\n"
         }
       end
+
+      new_content = new_content.gsub(/(<\/head>)/){
+        html = ""
+        html << "<script src=\"hs_application.js\" type=\"text/javascript\"></script>\n"
+        html << "#{$1}\n"
+      }
 
       new_content = new_content.gsub(/<body>(.*)<\/body>/m){
         html = ""
@@ -255,6 +264,7 @@ module HtmlShow
 
     def make_index_html
       FileUtils.cp(Pathname(__FILE__).dirname.join("jquery.js"), outputdir, :verbose => true)
+      FileUtils.cp(Pathname(__FILE__).dirname.join("hs_application.js"), outputdir, :verbose => true)
 
       if @config[:prettify]
         FileUtils.cp(Pathname(__FILE__).dirname.join("prettify.js"), outputdir, :verbose => true)
@@ -324,6 +334,6 @@ if $0 == __FILE__
     # config[:outputdir] = "/tmp/_output"
     config[:prettify] = true
     # config[:relpath] = false
-    config[:open] = false
+    config[:open] = true
   end
 end
