@@ -214,7 +214,7 @@ module HtmlShow
         html = ""
         html << "#{$1}"
         html << paginate
-        html << "    <h1 class=\"__hs__\">#{h1_part}</h1>\n"
+        html << "    <h1 class=\"__hs__\">#{@current_index.next}. #{h1_part}</h1>\n"
       }
 
       new_content = new_content.gsub(/(<\/body>)/){
