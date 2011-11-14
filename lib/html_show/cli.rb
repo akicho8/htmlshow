@@ -10,7 +10,7 @@ module HtmlShow
       config = instance.config
 
       oparser = OptionParser.new do |oparser|
-        oparser.version = "0.0.2"
+        oparser.version = "0.0.3"
         oparser.banner = [
           "usage: #{oparser.program_name} [options] files...",
         ].collect{|e|e + "\n"}

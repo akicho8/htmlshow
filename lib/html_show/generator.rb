@@ -197,7 +197,7 @@ module HtmlShow
 
       new_content = new_content.gsub(/(<\/head>)/){
         html = ""
-        html << "<script src=\"hs_application.js\" type=\"text/javascript\"></script>\n"
+        html << "<script src=\"htmlshow.js\" type=\"text/javascript\"></script>\n"
         html << "#{$1}\n"
       }
 
@@ -264,7 +264,7 @@ module HtmlShow
 
     def make_index_html
       FileUtils.cp(Pathname(__FILE__).dirname.join("jquery.js"), outputdir, :verbose => true)
-      FileUtils.cp(Pathname(__FILE__).dirname.join("hs_application.js"), outputdir, :verbose => true)
+      FileUtils.cp(Pathname(__FILE__).dirname.join("htmlshow.js"), outputdir, :verbose => true)
 
       if @config[:prettify]
         FileUtils.cp(Pathname(__FILE__).dirname.join("prettify.js"), outputdir, :verbose => true)
