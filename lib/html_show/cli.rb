@@ -10,7 +10,7 @@ module HtmlShow
       config = instance.config
 
       oparser = OptionParser.new do |oparser|
-        oparser.version = "0.0.3"
+        oparser.version = "0.0.4"
         oparser.banner = [
           "usage: #{oparser.program_name} [options] files...",
         ].collect{|e|e + "\n"}
@@ -25,6 +25,7 @@ module HtmlShow
         oparser.on("--[no-]static", "assetsをコピーする？(初期値:#{config[:static]})", TrueClass){|config[:static]|}
         oparser.on("--[no-]relpath", "assetsをsymlinkするとき相対パスにしとく？(初期値:#{config[:relpath]})", TrueClass){|config[:relpath]|}
         oparser.on("--[no-]keyboard", "ページングをキーボードで操作する？(初期値:#{config[:keyboard]})", TrueClass){|config[:keyboard]|}
+        oparser.on("--[no-]prettify", "コードに色付けする？(初期値:#{config[:prettify]})", TrueClass){|config[:prettify]|}
       end
 
       args = oparser.parse(args)

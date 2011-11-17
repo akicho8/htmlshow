@@ -222,13 +222,13 @@ module HtmlShow
         if part_for(:body).present?
           html << "<section class=\"__hs__\">\n"
           html << "  <h2 class=\"__hs__\">HTML</h2>\n"
-          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(part_for(:body))}</pre>\n"
+          html << "  <pre class=\"#{pre_class}\">#{CGI.escapeHTML(part_for(:body))}</pre>\n"
           html << "</section>\n"
         end
         if js_part.present?
           html << "<section class=\"__hs__\">\n"
           html << "  <h2 class=\"__hs__\">JavaScript</h2>\n"
-          html << "  <pre class=\"prettyprint linenums\">#{CGI.escapeHTML(js_part)}</pre>\n"
+          html << "  <pre class=\"#{pre_class}\">#{CGI.escapeHTML(js_part)}</pre>\n"
           html << "</section>\n"
         end
         if short_memo_part.present?
@@ -247,6 +247,14 @@ module HtmlShow
 
     def require_jqeury?
       true
+    end
+
+    def pre_class
+      if @config[:prettify]
+        "prettyprint linenums"
+      else
+        "__hs__"
+      end
     end
 
     def next_file(add)
