@@ -3,7 +3,7 @@ Gem::Specification.new do |spec|
   spec.version = "0.0.4"
   spec.summary = "HTML convert to decorated HTML"
   spec.author = "akicho8"
-  spec.homepage = "http://github.com/akicho8/html_show"
+  spec.homepage = "http://github.com/akicho8/htmlshow"
   spec.description = "HTML5, JavaScript, CSS3 etc... minimum test files convert t presentation files"
   spec.email = "akicho8@gmail.com"
   spec.files = %x[git ls-files].scan(/\S+/)

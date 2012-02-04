@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-require "html_show/generator"
+require "htmlshow/generator"
 require "optparse"
 
 module HtmlShow
