@@ -7,7 +7,7 @@ require "fileutils"
 require "cgi"
 require "pp"
 
-module HtmlShow
+module Htmlshow
   def self.generate(*args, &block)
     Generator.new(*args, &block).run
   end
@@ -43,7 +43,8 @@ module HtmlShow
       end
       FileUtils.makedirs(outputdir, :verbose => @config[:verbose])
       make_assets_symlink
-      target_files.each_with_index{|current_file, @current_index|
+      target_files.each_with_index{|current_file, index|
+        @current_index = index
         @content = current_file.read
         output_file = outputdir + current_file.basename
         @number = current_file.basename.to_s.to_i
@@ -333,7 +334,7 @@ module HtmlShow
 end
 
 if $0 == __FILE__
-  HtmlShow.generate do |config|
+  Htmlshow.generate do |config|
     config[:files] = Pathname(__FILE__).dirname.join("../../examples/*.html").expand_path
     config[:range] = 0..100
     config[:static] = false

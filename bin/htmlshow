@@ -5,4 +5,4 @@ rescue LoadError
   require "rubygems"
   require "htmlshow/cli"
 end
-HtmlShow::CLI.execute(ARGV)
+Htmlshow::CLI.execute(ARGV)

@@ -1,5 +1,7 @@
-HtmlShow
+Htmlshow
 ========
+
+HTMLファイルをまとめてプレゼン用のHTMLに変換するツール
 
 Example
 -------
@@ -11,9 +13,9 @@ Example
     ├── 20_jquery_hover.html
     ├── 30_bootstrap.html
     └── assets
-         ├── bootstrap.css
-         ├── jquery.js
-         └── rails.png
+     ├── bootstrap.css
+     ├── jquery.js
+     └── rails.png
 
     $ htmlshow
     3 files done.
@@ -25,9 +27,9 @@ Example
     ├── 30_bootstrap.html
     ├── application.css
     ├── assets
-    │   ├── bootstrap.css
-    │   ├── jquery.js
-    │   └── rails.png
+    │ ├── bootstrap.css
+    │ ├── jquery.js
+    │ └── rails.png
     ├── index.html
     └── jquery.js
 
