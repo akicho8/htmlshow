@@ -14,7 +14,6 @@ Htmlshow
             --reset                      全部消して作り直す？(初期値:false)
             --[no-]static                assetsをコピーする？(初期値:false)
             --[no-]relpath               assetsをsymlinkするとき相対パスにしとく？(初期値:true)
-            --[no-]keyboard              ページングをキーボードで操作する？(初期値:true)
             --[no-]prettify              コードに色付けする？(初期値:true)
 
 実行例

@@ -25,7 +25,6 @@ module Htmlshow
         oparser.on("--reset", "全部消して作り直す？(初期値:#{config[:reset]})", TrueClass){|v|config[:reset] = v}
         oparser.on("--[no-]static", "assetsをコピーする？(初期値:#{config[:static]})", TrueClass){|v|config[:static] = v}
         oparser.on("--[no-]relpath", "assetsをsymlinkするとき相対パスにしとく？(初期値:#{config[:relpath]})", TrueClass){|v|config[:relpath] = v}
-        oparser.on("--[no-]keyboard", "ページングをキーボードで操作する？(初期値:#{config[:keyboard]})", TrueClass){|v|config[:keyboard] = v}
         oparser.on("--[no-]prettify", "コードに色付けする？(初期値:#{config[:prettify]})", TrueClass){|v|config[:prettify] = v}
       end
 

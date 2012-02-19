@@ -31,7 +31,6 @@ module Htmlshow
         :prettify       => true,
         :open           => false,
         :relpath        => true,
-        :keyboard       => true,
       }.merge(config)
 
       if block_given?
@@ -132,6 +131,8 @@ module Htmlshow
     def js_part
       if md = @content.match(/<script type=\"text\/javascript\">\n(.*)\n\s*<\/script>/m)
         md.captures.first.lines.to_a[1..-2].join.strip_heredoc
+      elsif md = @content.match(/<script type=\"text\/coffeescript\">\n(.*)\n\s*<\/script>/m)
+        md.captures.first.strip_heredoc
       end
     end
 
@@ -242,6 +243,12 @@ module Htmlshow
           html << "</section>\n"
         end
         html << paginate
+        html << "#{$1}"
+      }
+
+      new_content = new_content.gsub(/(<\/body>)/){
+        html = ""
+        html << "<p class=\"__hs_shortcut\">ショートカット: [P]rev [N]ext [I]ndex</p>"
         html << "#{$1}"
       }
 
