@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "htmlshow"
-  spec.version = "0.0.5"
+  spec.version = "0.0.6"
   spec.summary = "HTML files convert to paginated html files"
   spec.author = "akicho8"
   spec.homepage = "http://github.com/akicho8/htmlshow"

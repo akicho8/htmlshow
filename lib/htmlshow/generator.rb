@@ -8,6 +8,8 @@ require "cgi"
 require "pp"
 
 module Htmlshow
+  VERSION = "0.0.6"
+
   def self.generate(*args, &block)
     Generator.new(*args, &block).run
   end

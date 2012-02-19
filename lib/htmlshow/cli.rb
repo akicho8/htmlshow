@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-require "htmlshow/generator"
 require "optparse"
+require_relative "generator"
 
 module Htmlshow
   class CLI
@@ -10,10 +10,11 @@ module Htmlshow
       config = instance.config
 
       oparser = OptionParser.new do |oparser|
-        oparser.version = "0.0.5"
+        oparser.version = VERSION
         oparser.banner = [
-          "usage: #{oparser.program_name} [options] files...",
-        ].collect{|e|e + "\n"}
+          "小さなHTMLを束ねてプレゼン向けHTTMLに変換するなんだかよくわからないツール #{oparser.ver}\n",
+          "使い方: #{oparser.program_name} [オプション] ディレクトリ or ファイル...\n",
+        ].join
         oparser.separator("options:")
         oparser.on("-i", "--files=FILES", "対象ファイル(オプションで指定してもいい)"){|v|config[:files] = v}
         oparser.on("-r", "--range=RANGE", "範囲(初期値:指定なし)"){|v|config[:range] = v}

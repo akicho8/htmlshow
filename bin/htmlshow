@@ -1,8 +1,3 @@
 #!/usr/bin/env ruby
-begin
-  require "htmlshow/cli"
-rescue LoadError
-  require "rubygems"
-  require "htmlshow/cli"
-end
+require "htmlshow/cli"
 Htmlshow::CLI.execute(ARGV)
