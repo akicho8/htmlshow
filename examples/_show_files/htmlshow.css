@@ -19,3 +19,6 @@ pre.__hs__ {
   background: #ccc;
   line-height: 1.2em;
   font-size: 24px; }
+
+.__hs_shortcut {
+  color: #999999; }
